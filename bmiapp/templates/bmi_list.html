@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center m-4">
+  <h1 style="color: black; text-align: center " class="">BMI CALCULATOR</h1>
+</div>
+
+<div class="container"> 
+  <div class="row justify-content-around mt-3">
+    
+    <div class="col-sm-12">
+      <form method="POST" class=" p-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+        <input class="btn btn-warning text-center" type="submit" name="calculate" value="calculate" />
+    
+    </form>
+   
+
+
+    {% if is_form_calculated %}
+    {% if 18.5 >= bmi %}
+    <h2 style="color:orange;"> Your Body Mass Index is {{bmi}}. This is considered {{message}}. </h2>
+    {% endif %}
+
+    {% if bmi >= 18.6 and 24.9 >= bmi %}
+    <h5 style="color:green;"> Your Body Mass Index is {{bmi}}. This is considered {{message}}. </h5>
+    {% endif %}
+
+    {% if bmi >= 25 and 29.9 >= bmi %}
+    <h5 style="color:blue;"> Your Body Mass Index is {{bmi}}. This is considered {{message}}. </h5>
+    {% endif %}
+
+    {% if bmi >= 30 %}
+    <h5 style="color:red;"> Your Body Mass Index is {{bmi}}. This is considered {{message}}. </h5>
+    {% endif %}
+    {% endif %}
+
+  </div>
+</div>
+</div>
+<br>
+<br>
+<div class="container" style="color: black; text-align: center">
+  <p>BMI = body mass index</p>
+  <p>Under Weight => BMI < 18.5</p>
+  <p>Normal Weight => BMI >= 18.5 <= 24.9</p>
+  <p>Over Weight => BMI > 25 < 30</p>
+  <p>Obesity => BMI > 30</p>
+</div>
+
+{% endblock content %}
+
+
+

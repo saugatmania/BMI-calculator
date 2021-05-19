@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+    {% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<form method = "POST" class="container" >
+    <!-- {{ block.super }} -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <input type="hidden" value=" {{ next }}" /> -->
+    <input type="submit" value="LogIn" name = "LogIn" />
+</form>
+{% endblock content %}
