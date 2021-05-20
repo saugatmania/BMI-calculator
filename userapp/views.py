@@ -3,10 +3,9 @@ from django.http  import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.views import LoginView
 from userapp.forms import CustomSignupForm, User_profile
 from userapp.models import Profile
-# from django.contrib.auth import authenticate, login
-# from django.contrib.auth.forms import UserCreationForm
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
+from django.contrib.auth import logout
 
    
 
@@ -16,11 +15,9 @@ def user_profile(request):
     return render(request, "user_profile.html",context)
 
 
-
 class UserLogin(LoginView):
     template_name = "user_login.html"
     redirect_authenticated_user = False
-
 
 
 def profile_create(request):
@@ -32,7 +29,6 @@ def profile_create(request):
     return render(request, "profile_create.html", context)
 
 
-
 def signup_view(request):
     form = CustomSignupForm(request.POST or None)
     if form.is_valid():
@@ -40,6 +36,7 @@ def signup_view(request):
         return HttpResponseRedirect(reverse("userapp:user_login"))
     context = {"form": form}
     return render(request, "register.html", context)
+
 
 def profile_edit(request, id):
     profile = get_object_or_404 (Profile, id=id)
@@ -50,10 +47,10 @@ def profile_edit(request, id):
     context = {"form":form}
     return render(request, "profile_create.html", context)
 
+
 def UserLogout(request):
     logout(request)
     return redirect("userapp:user_login")
-
 
 
 def send_confirm_email(request):
