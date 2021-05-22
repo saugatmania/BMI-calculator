@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, get_object_or_404
+from django.shortcuts import render, reverse, get_object_or_404, redirect
 from django.http  import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.views import LoginView
 from userapp.forms import CustomSignupForm, User_profile
@@ -10,9 +10,15 @@ from django.contrib.auth import logout
    
 
 def user_profile(request):
-    list = Profile.objects.all()
+    list = Profile.objects.filter(user=request.user)
     context = {"list":list}
     return render(request, "user_profile.html",context)
+
+
+def my_profile(request):
+    pro = Profile.objects.filter(user=request.user)
+    context={"list":pro}
+    return render (request, "bmi_list.html", context)
 
 
 class UserLogin(LoginView):
@@ -50,7 +56,7 @@ def profile_edit(request, id):
 
 def UserLogout(request):
     logout(request)
-    return redirect("userapp:user_login")
+    return HttpResponseRedirect("/user/login/")
 
 
 def send_confirm_email(request):

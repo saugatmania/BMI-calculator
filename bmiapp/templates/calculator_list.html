@@ -29,14 +29,13 @@
         
         {% for lists in list %}
             <tr>
-                <td> {{ lists.user}}</td>
+                <td>{{lists.user}}</td>
                 <td>{{lists.weight}}</td>
                 <td>{{lists.height}}</td>
-                <td>{{lists.bmi}}</td>
+                <td>{{lists.bmi|floatformat:2}}</td>
                 <td>{{lists.created}}</td>
                 <td>{{lists.modified}}</td>
                 <td>
-                <a class="btn btn-danger" href="{% url 'calculator:calculator_edit' lists.id %}">-></a>
                 <a class="btn btn-danger" href="{% url 'calculator:calculator_delete' lists.id %}">Delete</a>
                 </td>
             </tr>

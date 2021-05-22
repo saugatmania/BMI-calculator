@@ -5,6 +5,8 @@
 {% endblock navbar %}
 
 {% block content %}
+<br>
+<br>
 <form method="POST" class="container">
     {% csrf_token %} 
     {{ form.as_p }}

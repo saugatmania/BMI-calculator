@@ -10,7 +10,7 @@ class Profile(models.Model):
         ("female", "FEMALE"),
         ("other", "OTHER")
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User,related_name="profile", on_delete=models.CASCADE)
     full_name = models.CharField(max_length=30)
     contact = models.IntegerField(default=1)
     age = models.IntegerField(default=1)
@@ -20,7 +20,7 @@ class Profile(models.Model):
     
     
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 @receiver(post_save, sender=User)
 def update_profile(sender, instance, created, **kwargs):

@@ -5,7 +5,7 @@
 {% endblock navbar %}
 
 {% block content %}
-<form method="POST" class="container">
+<form method="POST" class="container mt-5">
   {% csrf_token %} 
   {{ form.as_p }}
   <input type="submit" name="register" value="Register" />

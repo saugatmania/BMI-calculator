@@ -5,29 +5,50 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="{% url 'userapp:user_login' %}">LOGIN</a>
+      
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'userapp:register' %}">Register</a>
-        </li>
+      {% if request.user.is_authenticated %}  
         <li class="nav-item ">
           <a class="nav-link active" href="{% url 'userapp:profile' %}">Profile</a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link active" href="{% url 'calculator:calculator_list' %}">MY BMI</a>
         </li>
         <!-- <li class="nav-item ">
           <a class="nav-link active" href="{% url 'calculator:calculator_list' %}">BMI List</a>
         </li> -->
-        <li class="nav-item ">
+        <!-- <li class="nav-item ">
           <a class="nav-link active" href="{% url 'userapp:profile_create' %}">Create</a>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link active" href="{% url 'userapp:user_login' %}">Logout</a>
-        </li>
-        <li class="nav-item ">
+        </li> -->
+        
+        <!-- <li class="nav-item ">
           <a type="button" class="btn btn-warning text-dark" href="{% url 'calculator:calculator_add' %}">BMI</a>
-        </li>
+        </li> -->
         
       </ul> 
     </div>
+    <div>
+    <li class="nav-item pull-right">
+          <a class="btn btn-danger text-dark" href="{% url 'userapp:UserLogout' %}">LOGOUT</a>
+    </li>
+    </div>
+    {% else %}
+    <div>
+      <h4 class="text-white">WELCOME TO BMI CALCULATOR</h4>
+    </div>
+    </div>
+    <li class="nav-item pull-right">
+          <a class="btn btn-warning" aria-current="page" href="{% url 'userapp:register' %}">Register</a>
+    </li>
+
+    <li class="nav-item ">
+          <a class="btn btn-warning" href="{% url 'userapp:user_login' %}">LOGIN</a>
+    </li>
+    </div>
+    {% endif %}
+    
   </div>
 </nav>

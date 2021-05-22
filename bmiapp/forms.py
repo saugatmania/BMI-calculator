@@ -1,5 +1,5 @@
 from django import forms 
-from bmiapp.models import Calculator, Suggestion
+from bmiapp.models import Calculator
 
 class BMIform(forms.ModelForm):
     class Meta:
@@ -7,8 +7,5 @@ class BMIform(forms.ModelForm):
         fields = "__all__"
         exclude = ("result","user")
 
-class SuggestionForm(forms.ModelForm):
-    class Meta:
-        model = Suggestion
-        fields = "__all__"
+
     
